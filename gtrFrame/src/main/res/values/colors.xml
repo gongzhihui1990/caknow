@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017. heisenberg.gong
+  -->
+
+<resources>
+    <color name="get_red">#C21D21</color>
+    <color name="get_red_dis">#55C21D21</color>
+
+</resources>
