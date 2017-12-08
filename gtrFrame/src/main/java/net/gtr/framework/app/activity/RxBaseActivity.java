@@ -2,7 +2,7 @@
  * Copyright (c) 2017. heisenberg.gong
  */
 
-package net.gtr.framework.app;
+package net.gtr.framework.app.activity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -156,7 +156,6 @@ public abstract class RxBaseActivity extends BaseFragmentActivity implements App
         }
         compositeSubscription.remove(subscription);
     }
-
 
 
     @Override

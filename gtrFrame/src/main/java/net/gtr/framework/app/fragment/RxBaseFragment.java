@@ -2,7 +2,7 @@
  * Copyright (c) 2017. heisenberg.gong
  */
 
-package net.gtr.framework.app;
+package net.gtr.framework.app.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import net.gtr.framework.app.activity.RxBaseActivity;
 import net.gtr.framework.rx.ApplicationObserverHolder;
 import net.gtr.framework.util.Loger;
 
@@ -59,7 +60,6 @@ public abstract class RxBaseFragment extends Fragment implements ApplicationObse
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (container != null) {
             ButterKnife.bind(this, container);
-            Loger.d("ButterKnife.bind");
         }
         return container;
     }

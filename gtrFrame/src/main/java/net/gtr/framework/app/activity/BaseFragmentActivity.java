@@ -2,7 +2,7 @@
  * Copyright (c) 2017. heisenberg.gong
  */
 
-package net.gtr.framework.app;
+package net.gtr.framework.app.activity;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
