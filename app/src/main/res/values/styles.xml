@@ -1,11 +1,102 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="BaseAppTheme" />
+
+    <style name="BaseAppTheme" parent="BaseAppTheme.NoActionBar" />
+
+    <style name="BaseAppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@android:color/transparent</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="FullscreenTheme" parent="AppTheme">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+
+    <style name="LaunchTheme" parent="FullscreenTheme">
+
+        <!--
+                <item name="android:windowBackground">@drawable/bg_launch_window</item>
+        -->
+    </style>
+
+    <style name="small_size_style">
+        <item name="android:textSize">@dimen/text_small</item>
+    </style>
+
+    <style name="small_white_style" parent="@style/small_size_style">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="small_gray_style" parent="@style/small_size_style">
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="small_black_style" parent="@style/small_size_style">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="small_red_style" parent="@style/small_size_style">
+        <item name="android:textColor">@color/red</item>
+    </style>
+
+    <style name="small_blue_style" parent="@style/small_size_style">
+        <item name="android:textColor">@color/blue</item>
+    </style>
+
+    <!-- 中字体 -->
+    <style name="middle_size_style">
+        <item name="android:textSize">@dimen/text_middle</item>
+    </style>
+
+    <style name="middle_gray_style" parent="@style/middle_size_style">
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="middle_black_style" parent="@style/middle_size_style">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="middle_white_style" parent="@style/middle_size_style">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="middle_blue_style" parent="@style/middle_size_style">
+        <item name="android:textColor">@color/blue</item>
+    </style>
+
+
+    <style name="middle_green_style" parent="@style/middle_size_style">
+        <item name="android:textColor">@color/green</item>
+    </style>
+
+    <!-- 大字体 -->
+    <style name="big_size_style">
+        <item name="android:textSize">@dimen/text_big</item>
+    </style>
+
+    <style name="big_white_style" parent="@style/big_size_style">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="big_gray_style" parent="@style/big_size_style">
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="big_black_style" parent="@style/big_size_style">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="big_blue_style" parent="@style/big_size_style">
+        <item name="android:textColor">@color/blue</item>
     </style>
 
 </resources>

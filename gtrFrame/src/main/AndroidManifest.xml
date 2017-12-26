@@ -5,6 +5,8 @@
 <manifest
     package="hsbank.com.gtrframe">
 
-    <application />
+    <application>
+
+    </application>
 
 </manifest>

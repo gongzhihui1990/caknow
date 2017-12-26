@@ -9,10 +9,16 @@ import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.crashreport.BuglyLog;
+import com.tencent.bugly.crashreport.CrashReport;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
+
+import static android.os.Build.SERIAL;
 
 /**
  * Created by heisenberg on 2017/10/15.
@@ -30,8 +36,22 @@ public class BaseApp extends Application {
     public void onCreate() {
         super.onCreate();
         context = this.getBaseContext();
+        initCrashReport();
     }
-
+    private void initCrashReport() {
+        BuglyLog.setCache(30 * 1024);
+        Bugly.init(getApplicationContext(), "38c73cda60", false);
+        Context context = getApplicationContext();
+        // 获取当前包名
+        String packageName = context.getPackageName();
+        // 获取当前进程名
+        String processName = getProcessName();
+        // 设置是否为上报进程
+        CrashReport.UserStrategy strategy = new CrashReport.UserStrategy(context);
+        strategy.setUploadProcess(processName == null || processName.equals(packageName));
+        //CrashReport.initCrashReport(getApplicationContext());
+        CrashReport.setUserId(SERIAL.toUpperCase());
+    }
     /**
      * 获取进程号对应的进程名
      *

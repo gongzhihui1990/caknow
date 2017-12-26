@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2017. heisenberg.gong
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/action_bar_size" >
+
+    <ImageView
+        android:id="@+id/iv_titleBack"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:paddingStart="@dimen/dimens_20"
+        android:paddingEnd="@dimen/dimens_20"
+        android:src="@drawable/icon_title_back_black" />
+
+    <View
+        android:id="@+id/view_titleLine"
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/dimens_32"
+        android:layout_marginTop="@dimen/dimens_32"
+        android:layout_toRightOf="@id/iv_titleBack"
+        android:background="@android:color/white" />
+
+    <TextView
+        android:id="@+id/tv_titleName"
+        style="@style/big_white_style"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/dimens_32"
+        android:layout_toRightOf="@id/view_titleLine"
+        android:gravity="center_vertical"
+        android:text="title" />
+
+    <TextView
+        android:id="@+id/tv_envHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="@string/env_test_prompt"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:visibility="visible" />
+
+
+</RelativeLayout>

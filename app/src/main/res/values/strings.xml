@@ -1,3 +1,33 @@
 <resources>
+    <string name="facebook_app_id">368591953552491</string>
+    <string name="fb_login_protocol_scheme">fb368591953552491</string>
+
     <string name="app_name">Caknow</string>
+    <string name="enter_phone_hint">Enter Your Phone Number</string>
+    <string name="continue_with">Continue with:</string>
+    <string name="env_test_prompt">Notice: Now Is In The TEST ENV</string>
+
+    <string name="register_text_01">PHONE NUMBER</string>
+    <string name="register_text_02">Please tell us about your mobile phone number.</string>
+    <string name="register_next">Next</string>
+
+    <string name="register_text_21">VERIFICATION</string>
+    <string name="register_text_22">Please enter the 4-digit code we just sent to your phone.</string>
+
+    <string name="register_text_31">CONTACT</string>
+    <string name="register_text_32_FN">First Name</string>
+    <string name="register_text_32_LN">Last Name</string>
+    <string name="register_text_32_EA">Email Address</string>
+    <string name="register_text_32_PN">Phone Number</string>
+
+    <string name="register_text_41">WELCOME</string>
+    <string name="register_text_42">FORGET?</string>
+
+    <string name="tab_service">Service</string>
+    <string name="tab_community">Community</string>
+    <string name="tab_advice">Advice</string>
+    <string name="tab_settings">Settings</string>
+
+
+
 </resources>

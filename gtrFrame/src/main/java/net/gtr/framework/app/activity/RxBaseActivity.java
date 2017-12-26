@@ -5,6 +5,7 @@
 package net.gtr.framework.app.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v4.app.Fragment;
@@ -161,5 +162,10 @@ public abstract class RxBaseActivity extends BaseFragmentActivity implements App
     @Override
     public void showDialog(Object o) {
 
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 }

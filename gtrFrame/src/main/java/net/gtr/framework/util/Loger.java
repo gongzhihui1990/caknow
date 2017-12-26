@@ -4,6 +4,8 @@
 
 package net.gtr.framework.util;
 
+import android.util.Log;
+
 import com.tencent.bugly.crashreport.BuglyLog;
 
 import net.gtr.framework.app.BaseApp;
@@ -310,21 +312,27 @@ public class Loger {
 
 
     private static void addTerminalLog(Level logLevel, String tag, String log) {
+        System.out.println("add"+logLevel+":"+tag+":"+log);
         switch (logLevel) {
             case Verbose:
+                Log.v(tag,log);
                 BuglyLog.v(tag, log);
                 break;
             case Info:
+                Log.i(tag,log);
                 BuglyLog.i(tag, log);
                 break;
             case Debug:
+                Log.d(tag,log);
                 BuglyLog.d(tag, log);
                 break;
             case Warn:
+                Log.w(tag,log);
                 BuglyLog.w(tag, log);
                 break;
             case Error:
             case Special:
+                Log.e(tag,log);
                 BuglyLog.e(tag,log);
                 break;
         }
