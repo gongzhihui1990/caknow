@@ -13,11 +13,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import net.gtr.framework.app.activity.RxBaseActivity;
 import net.gtr.framework.rx.ApplicationObserverHolder;
-import net.gtr.framework.util.Loger;
 
 import org.reactivestreams.Subscription;
 
@@ -33,6 +31,7 @@ public abstract class RxBaseFragment extends Fragment implements ApplicationObse
     protected List<Subscription> compositeSubscription = new ArrayList<>();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
+    @Override
     public FragmentManager getSupportFragmentManager() {
         return getFragmentManager();
     }
@@ -56,8 +55,7 @@ public abstract class RxBaseFragment extends Fragment implements ApplicationObse
     }
 
     @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable View container, @Nullable Bundle savedInstanceState) {
         if (container != null) {
             ButterKnife.bind(this, container);
         }
@@ -121,6 +119,7 @@ public abstract class RxBaseFragment extends Fragment implements ApplicationObse
      *
      * @param disposable
      */
+    @Override
     public void addDisposable(Disposable disposable) {
         if (compositeDisposable == null) {
             return;
@@ -133,10 +132,12 @@ public abstract class RxBaseFragment extends Fragment implements ApplicationObse
      *
      * @param subscription
      */
+    @Override
     public void addSubscription(Subscription subscription) {
         compositeSubscription.add(subscription);
     }
 
+    @Override
     public void removeDisposable(Disposable disposable) {
         if (compositeDisposable == null) {
             return;
@@ -144,6 +145,7 @@ public abstract class RxBaseFragment extends Fragment implements ApplicationObse
         compositeDisposable.remove(disposable);
     }
 
+    @Override
     public void removeSubscription(Subscription subscription) {
         if (compositeSubscription == null) {
             return;

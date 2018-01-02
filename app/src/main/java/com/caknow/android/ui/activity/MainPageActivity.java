@@ -16,6 +16,8 @@ import com.caknow.android.R;
 import com.caknow.android.ui.BaseFragmentArgs;
 import com.caknow.android.ui.adapter.ViewPagerMainAdapter;
 import com.caknow.android.ui.fragment.DisableFragment;
+import com.caknow.android.ui.fragment.MainServiceFragment;
+import com.caknow.android.ui.fragment.MainSettingFragment;
 import com.caknow.android.widget.MainViewPager;
 
 import net.gtr.framework.app.activity.RxBaseActivity;
@@ -35,15 +37,21 @@ public class MainPageActivity extends RxBaseActivity {
     LinearLayout mainPagerLayout;
     private ViewPagerMainAdapter mainPagerAdapter;
 
+    private int mSelectedPosition = 0;
+    private final String BUNDLE_KEY = "BUNDLE_KEY";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (savedInstanceState != null) {
+            mSelectedPosition = savedInstanceState.getInt(BUNDLE_KEY, 0);
+        }
         ArrayList<BaseFragmentArgs> fragmentArgs = new ArrayList<BaseFragmentArgs>();
-        fragmentArgs.add(new BaseFragmentArgs(DisableFragment.class, R.string.tab_service, R.drawable.icons_tab_service));
+        fragmentArgs.add(new BaseFragmentArgs(MainServiceFragment.class, R.string.tab_service, R.drawable.icons_tab_service));
         fragmentArgs.add(new BaseFragmentArgs(DisableFragment.class, R.string.tab_community, R.drawable.icons_tab_community));
         fragmentArgs.add(new BaseFragmentArgs(DisableFragment.class, R.string.tab_advice, R.drawable.icons_tab_advice));
-        fragmentArgs.add(new BaseFragmentArgs(DisableFragment.class, R.string.tab_settings, R.drawable.icons_tab_settings));
+        fragmentArgs.add(new BaseFragmentArgs(MainSettingFragment.class, R.string.tab_settings, R.drawable.icons_tab_settings));
         initPager(viewPager, fragmentArgs);
     }
 
@@ -74,8 +82,9 @@ public class MainPageActivity extends RxBaseActivity {
             public void onPageSelected(int postion) {
                 // final Fragment selectedFragment =
                 // mainPagerAdapter.getItem(postion);
-                BaseFragmentArgs curpage = fragmentArgs.get(postion);
-                Class curFragment = curpage.getFragment();
+                mSelectedPosition = postion;
+//                BaseFragmentArgs curpage = fragmentArgs.get(postion);
+//                Class curFragment = curpage.getFragment();
 //                if (curFragment.getName().equals(LocationFragment.class.getName())) {
                 //TripRecordService.onlocationPage = true;
 //                } else {
@@ -83,7 +92,7 @@ public class MainPageActivity extends RxBaseActivity {
 //                }
                 for (int i = 0; i < mainPagerLayout.getChildCount(); i++) {
                     LinearLayout itemBoom = (LinearLayout) mainPagerLayout.getChildAt(i);
-                    if (i == postion) {
+                    if (i == mSelectedPosition) {
                         itemBoom.setSelected(true);
                     } else {
                         itemBoom.setSelected(false);
@@ -103,11 +112,10 @@ public class MainPageActivity extends RxBaseActivity {
             addItemArg(fragmentArgs, index, viewPager);
         }
         // initial
-        final int initPosition = 0;
-        viewPager.setCurrentItem(initPosition, false);
+        viewPager.setCurrentItem(mSelectedPosition, false);
         for (int i = 0; i < mainPagerLayout.getChildCount(); i++) {
             LinearLayout itemBoom = (LinearLayout) mainPagerLayout.getChildAt(i);
-            if (i == initPosition) {
+            if (i == mSelectedPosition) {
                 itemBoom.setSelected(true);
             } else {
                 itemBoom.setSelected(false);
@@ -142,5 +150,11 @@ public class MainPageActivity extends RxBaseActivity {
             }
         });
         mainPagerLayout.addView(layout);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(BUNDLE_KEY, mSelectedPosition);
     }
 }

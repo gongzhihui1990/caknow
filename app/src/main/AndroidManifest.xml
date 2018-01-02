@@ -11,11 +11,11 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:testOnly="false"
         android:name="com.caknow.android.CaknowApplication"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/app_name_caknow"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:testOnly="false"
         android:theme="@style/AppTheme">
 
         <activity
@@ -26,15 +26,21 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <!-- bugly support -->
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
             android:theme="@android:style/Theme.Translucent" />
-        <activity android:name=".ui.activity.MainPageActivity" />
+        <activity android:name=".ui.activity.MainPageActivity">
+            <intent-filter>
+                <action android:name="caknow.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.activity.LoginActivity" />
-        <activity android:name=".ui.activity.RegisterActivity" >
+        <activity android:name=".ui.activity.RegisterActivity">
             <intent-filter>
                 <action android:name="caknow.intent.action.REGISTER" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -48,7 +54,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
 
         <!-- 配置APP ID -->
@@ -60,25 +66,30 @@
             android:value="true" />
         <!-- bugly end -->
 
-        <meta-data android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
 
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name_caknow" />
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
 
-        <meta-data android:name="com.caknow.android.util.GlideConfiguration" android:value="GlideModule"/>
+        <meta-data
+            android:name="com.caknow.android.util.GlideConfiguration"
+            android:value="GlideModule" />
 
     </application>
 

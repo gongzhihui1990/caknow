@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-aspectjx'
 
 android {
     compileSdkVersion 27
@@ -20,13 +21,13 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('/workspace/github/Caknow/apkFile/psw_android.keystore')
+            storeFile file('/apkFile/psw_android.keystore')
             keyPassword 'android'
             keyAlias 'china'
             storePassword 'android'
         }
         debug {
-            storeFile file('/workspace/github/Caknow/apkFile/psw_android.keystore')
+            storeFile file('/apkFile/psw_android.keystore')
             keyPassword 'android'
             keyAlias 'china'
             storePassword 'android'
@@ -97,5 +98,6 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.justkiddingbaby:vercodeedittext:1.0.5'
     compile 'com.facebook.android:facebook-login:[4,5)'
-
+    /*fragment*/
+    compile 'com.justkiddingbaby:fragment-rigger:1.0.0'
 }

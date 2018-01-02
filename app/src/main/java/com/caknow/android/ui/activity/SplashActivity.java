@@ -16,17 +16,19 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 import com.youth.banner.loader.ImageLoader;
 
+import net.gtr.framework.rx.ProgressObserverImplementation;
+import net.gtr.framework.rx.RxHelper;
 import net.gtr.framework.util.Loger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -87,16 +89,31 @@ public class SplashActivity extends BaseActivity {
                     @Override
                     public void onError(FacebookException exception) {
                         // App code
-                        Toast.makeText(SplashActivity.this, "onError "+exception.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(SplashActivity.this, "onError " + exception.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
+        findViewById(R.id.enter_phone_hint).setEnabled(false);
+        RxHelper.bindOnUI(RxHelper.delay(1, TimeUnit.SECONDS, new Runnable() {
+            @Override
+            public void run() {
+                findViewById(R.id.enter_phone_hint).setEnabled(true);
+            }
+        }), new ProgressObserverImplementation<Runnable>(this) {
+            @Override
+            public void onNext(Runnable runnable) {
+                super.onNext(runnable);
+                runnable.run();
+            }
+        }.setShow(false));
+
     }
 
-    private boolean isLogin(){
+    private boolean isLogin() {
         boolean loggedIn = AccessToken.getCurrentAccessToken() != null;
         return loggedIn;
     }
-    @OnClick({R.id.enter_phone_hint,R.id.login_facebook,R.id.login_google})
+
+    @OnClick({R.id.enter_phone_hint, R.id.login_facebook, R.id.login_google})
     @Override
     public void onClick(View v) {
         super.onClick(v);
@@ -107,14 +124,18 @@ public class SplashActivity extends BaseActivity {
                 break;
             case R.id.login_facebook:
                 Loger.d("login_facebook start");
-                if (isLogin()){
+                if (isLogin()) {
                     Loger.d(" is logged");
-                }else {
-                    LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile","user_friends"));
+                } else {
+                    LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "user_friends"));
                     Loger.d("login_facebook logInWithReadPermissions");
                 }
                 break;
             case R.id.login_google:
+                Intent intentMain = new Intent(Action.Main.value);
+                startActivity(intentMain);
+                break;
+            default:
                 break;
         }
     }

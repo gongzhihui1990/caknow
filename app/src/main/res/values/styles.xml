@@ -99,4 +99,19 @@
         <item name="android:textColor">@color/blue</item>
     </style>
 
+    <!--设置样式-->
+    <style name="setting_title_style">
+        <item name="android:background">@color/gray_bg</item>
+    </style>
+
+    <style name="setting_title_text_style" parent="@style/middle_black_style">
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginLeft">@dimen/dimens_32</item>
+    </style>
+    <style name="setting_prop_title_style" parent="@style/small_black_style">
+        <item name="android:layout_height">@dimen/dimens_120</item>
+        <item name="android:layout_marginLeft">@dimen/dimens_32</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
 </resources>

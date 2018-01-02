@@ -1,12 +1,8 @@
 package com.caknow.android.ui.fragment.register;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 
 import com.caknow.android.R;
 import com.caknow.android.ui.activity.RegisterActivity;
@@ -25,10 +21,8 @@ public class InputSmsConfirmFragment extends BaseFragment {
     VerificationCodeEditText et_register_code;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_register_step_2, container, false);
-        return super.onCreateView(inflater, view, savedInstanceState);
+    protected int getContentView() {
+        return R.layout.fragment_register_step_2;
     }
 
     @Override

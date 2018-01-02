@@ -5,7 +5,8 @@ package com.caknow.android.constant;
  */
 
 public enum  Action {
-    Register("caknow.intent.action.REGISTER"),;
+    Register("caknow.intent.action.REGISTER"),
+    Main("caknow.intent.action.MAIN");
 
     public String value;
     Action(String action) {

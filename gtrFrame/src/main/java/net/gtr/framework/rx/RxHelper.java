@@ -190,7 +190,9 @@ public final class RxHelper {
      * @return
      */
     public static Observable<Integer> countdown(int time, long period, TimeUnit unit) {
-        if (time < 0) time = 0;
+        if (time < 0) {
+            time = 0;
+        }
         final int countTime = time;
         return Observable.interval(0, period, unit)
                 .subscribeOn(Schedulers.io())
@@ -201,6 +203,17 @@ public final class RxHelper {
                         return countTime - increaseTime.intValue();
                     }
                 }).take(countTime + 1);//通过take()取>=0的Observable
+    }
+    /**
+     * 倒计时
+     *
+     * @param time
+     * @return
+     */
+    public static Observable<Runnable> delay(int time, TimeUnit unit,Runnable delay) {
+        return Observable.just(delay)
+                .delay(time,unit);
+
     }
 
     private static <T> Observable<T> bindSameUINotSchedule(@android.support.annotation.NonNull Observable<T> observable) {

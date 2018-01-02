@@ -2,7 +2,7 @@
     <string name="facebook_app_id">368591953552491</string>
     <string name="fb_login_protocol_scheme">fb368591953552491</string>
 
-    <string name="app_name">Caknow</string>
+    <string name="app_name_caknow">Caknow</string>
     <string name="enter_phone_hint">Enter Your Phone Number</string>
     <string name="continue_with">Continue with:</string>
     <string name="env_test_prompt">Notice: Now Is In The TEST ENV</string>
@@ -28,6 +28,11 @@
     <string name="tab_advice">Advice</string>
     <string name="tab_settings">Settings</string>
 
+    <!--Service-->
+    <string name="service_hello_1">Hello,%1s</string>
+    <string name="service_hello_2">Please start to get your free estimates from here.</string>
 
-
+    <!--Community-->
+    <!--Advice-->
+    <!--Settings-->
 </resources>

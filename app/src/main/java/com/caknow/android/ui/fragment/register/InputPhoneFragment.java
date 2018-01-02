@@ -1,9 +1,6 @@
 package com.caknow.android.ui.fragment.register;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.caknow.android.R;
 import com.caknow.android.ui.activity.RegisterActivity;
@@ -17,10 +14,8 @@ import butterknife.OnClick;
 
 public class InputPhoneFragment extends BaseFragment implements View.OnClickListener {
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_register_step_1, container, false);
-        return super.onCreateView(inflater, view, savedInstanceState);
+    protected int getContentView() {
+        return R.layout.fragment_register_step_1;
     }
 
     @OnClick({R.id.register_next})
