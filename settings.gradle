@@ -1,1 +1,1 @@
-include ':app', ':gtrFrame'
+include ':app', ':gtrFrame', ':java_processors', ':java_annotations'

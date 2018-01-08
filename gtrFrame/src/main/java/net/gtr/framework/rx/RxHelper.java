@@ -190,9 +190,7 @@ public final class RxHelper {
      * @return
      */
     public static Observable<Integer> countdown(int time, long period, TimeUnit unit) {
-        if (time < 0) {
-            time = 0;
-        }
+        if (time < 0) time = 0;
         final int countTime = time;
         return Observable.interval(0, period, unit)
                 .subscribeOn(Schedulers.io())

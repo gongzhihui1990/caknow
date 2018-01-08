@@ -19,6 +19,7 @@ import com.caknow.android.ui.fragment.DisableFragment;
 import com.caknow.android.ui.fragment.MainServiceFragment;
 import com.caknow.android.ui.fragment.MainSettingFragment;
 import com.caknow.android.widget.MainViewPager;
+import com.caknow.annotations.LazyLoad;
 
 import net.gtr.framework.app.activity.RxBaseActivity;
 
@@ -29,7 +30,7 @@ import butterknife.BindView;
 /**
  * Created by caroline on 2017/12/10.
  */
-
+@LazyLoad(value = "caroline")
 public class MainPageActivity extends RxBaseActivity {
     @BindView(R.id.main_pager_container)
     MainViewPager viewPager;
