@@ -15,7 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import net.gtr.framework.app.activity.RxBaseActivity;
-import net.gtr.framework.rx.ApplicationObserverHolder;
+import net.gtr.framework.rx.ApplicationObserverResourceHolder;
+import net.gtr.framework.rx.ObserverResourceManager;
 
 import org.reactivestreams.Subscription;
 
@@ -26,15 +27,10 @@ import butterknife.ButterKnife;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
-public abstract class RxBaseFragment extends Fragment implements ApplicationObserverHolder {
+public abstract class RxBaseFragment extends Fragment implements ApplicationObserverResourceHolder {
     protected RxBaseActivity mActivity;
-    protected List<Subscription> compositeSubscription = new ArrayList<>();
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
-
-    @Override
-    public FragmentManager getSupportFragmentManager() {
-        return getFragmentManager();
-    }
+    //observer 观察者管理
+    ObserverResourceManager observerResourceManager = new ObserverResourceManager();
 
     @Override
     public void showDialog(Object o) {
@@ -103,15 +99,7 @@ public abstract class RxBaseFragment extends Fragment implements ApplicationObse
      * 切断此Activity中的观察者容器中包含的观察者
      */
     public void clearWorkOnDestroy() {
-        //disposable clear
-        compositeDisposable.clear();
-
-        for (Subscription subscription : compositeSubscription) {
-            if (subscription != null){
-                subscription.cancel();
-            }
-        }
-        compositeSubscription.clear();
+        observerResourceManager.clearWorkOnDestroy();
     }
 
     /**
@@ -121,10 +109,7 @@ public abstract class RxBaseFragment extends Fragment implements ApplicationObse
      */
     @Override
     public void addDisposable(Disposable disposable) {
-        if (compositeDisposable == null) {
-            return;
-        }
-        compositeDisposable.add(disposable);
+        observerResourceManager.addDisposable(disposable);
     }
 
     /**
@@ -134,36 +119,17 @@ public abstract class RxBaseFragment extends Fragment implements ApplicationObse
      */
     @Override
     public void addSubscription(Subscription subscription) {
-        compositeSubscription.add(subscription);
+        observerResourceManager.addSubscription(subscription);
     }
 
     @Override
     public void removeDisposable(Disposable disposable) {
-        if (compositeDisposable == null) {
-            return;
-        }
-        compositeDisposable.remove(disposable);
+        observerResourceManager.removeDisposable(disposable);
     }
 
     @Override
     public void removeSubscription(Subscription subscription) {
-        if (compositeSubscription == null) {
-            return;
-        }
-        compositeSubscription.remove(subscription);
+        observerResourceManager.removeSubscription(subscription);
     }
 
-    /**
-     * 得到根Fragment
-     *
-     * @return
-     */
-    private Fragment getRootFragment() {
-        Fragment fragment = this;
-        while (fragment.getParentFragment() != null) {
-            fragment = fragment.getParentFragment();
-        }
-        return fragment;
-
-    }
 }

@@ -35,7 +35,7 @@ abstract class AbstractProgressObserver<T> implements Observer<T>, Subscriber<T>
     private static final boolean DEBUG_TAG = true;
     private Disposable disposable;
     private Subscription subscription;
-    private ObserverHolder mHolder;
+    private ObserverResourceHolder mHolder;
     private long requestVar1 = 1;
 
     /**
@@ -94,7 +94,7 @@ abstract class AbstractProgressObserver<T> implements Observer<T>, Subscriber<T>
         onReleaseInternal();
     }
 
-    final void setObserverHolder(ObserverHolder observerHolder) {
+    final void setObserverHolder(ObserverResourceHolder observerHolder) {
         mHolder = observerHolder;
     }
 

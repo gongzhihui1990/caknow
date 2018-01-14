@@ -11,29 +11,41 @@ import io.reactivex.disposables.Disposable;
 /**
  * Created by heisenberg on 2017/7/21.
  * heisenberg.gong@koolpos.com
- * 观察者容器
+ * use to add/remove resource :
+ * {@link io.reactivex.disposables.Disposable} or {@link org.reactivestreams.Subscription}
  */
 
-interface ObserverHolder {
+public interface ObserverResourceHolder {
     /**
-     * 为容器添加disposable
+     * 为容器添加disposable resource
+     *
      * @param disposable
      */
     void addDisposable(Disposable disposable);
+
     /**
-     *为容器添加subscription
+     * 为容器添加subscription resource
+     *
      * @param subscription
      */
     void addSubscription(Subscription subscription);
+
     /**
-     *为容器移除disposable
+     * 为容器移除disposable resource
+     *
      * @param disposable
      */
     void removeDisposable(Disposable disposable);
+
     /**
-     *为容器移除subscription
+     * 为容器移除subscription resource
+     *
      * @param subscription
      */
     void removeSubscription(Subscription subscription);
-
+    /**
+     * 为容器移除所有resource
+     *
+     */
+    void clearWorkOnDestroy();
 }

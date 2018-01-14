@@ -29,9 +29,9 @@ public class ProgressObserverImplementation<T> extends AbstractProgressObserver<
     private Context context;
 
     /**
-     * @param applicationObserverHolder ApplicationObserverHolder
+     * @param applicationObserverHolder ApplicationObserverResourceHolder
      */
-    public ProgressObserverImplementation(@NonNull ApplicationObserverHolder applicationObserverHolder) {
+    public ProgressObserverImplementation(@NonNull ApplicationObserverResourceHolder applicationObserverHolder) {
         if (applicationObserverHolder != null) {
             setObserverHolder(applicationObserverHolder);
             context = applicationObserverHolder.getContext();
@@ -40,10 +40,6 @@ public class ProgressObserverImplementation<T> extends AbstractProgressObserver<
             pMessage = "加载中...";
             pDialog.setCancelable(mCancelable);
         }
-    }
-
-    @Deprecated
-    public ProgressObserverImplementation() {
     }
 
     /**

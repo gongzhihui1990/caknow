@@ -4,7 +4,6 @@
 
 package net.gtr.framework.app.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -12,23 +11,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
-import net.gtr.framework.rx.ApplicationObserverHolder;
+import net.gtr.framework.rx.ApplicationObserverResourceHolder;
+import net.gtr.framework.rx.ObserverResourceManager;
 
 import org.reactivestreams.Subscription;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.ButterKnife;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
-@SuppressLint({"InflateParams", "HandlerLeak"})
-public abstract class RxBaseActivity extends BaseFragmentActivity implements ApplicationObserverHolder {
+public abstract class RxBaseActivity extends BaseFragmentActivity implements ApplicationObserverResourceHolder {
 
     //observer 观察者管理
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private List<Subscription> compositeSubscription = new ArrayList<>();
+    ObserverResourceManager observerResourceManager = new ObserverResourceManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,16 +98,8 @@ public abstract class RxBaseActivity extends BaseFragmentActivity implements App
      * onDestroy时调用此方法
      * 切断此Activity中的观察者容器中包含的观察者
      */
-    private void clearWorkOnDestroy() {
-        //disposable clear
-        compositeDisposable.clear();
-        //subscription clear
-        for (Subscription subscription : compositeSubscription) {
-            if (subscription != null)
-                subscription.cancel();
-            subscription = null;
-        }
-        compositeSubscription.clear();
+    public void clearWorkOnDestroy() {
+        observerResourceManager.clearWorkOnDestroy();
     }
 
     /**
@@ -123,10 +109,7 @@ public abstract class RxBaseActivity extends BaseFragmentActivity implements App
      */
     @Override
     public void addDisposable(Disposable disposable) {
-        if (compositeDisposable == null) {
-            return;
-        }
-        compositeDisposable.add(disposable);
+        observerResourceManager.addDisposable(disposable);
     }
 
     /**
@@ -136,33 +119,19 @@ public abstract class RxBaseActivity extends BaseFragmentActivity implements App
      */
     @Override
     public void addSubscription(Subscription subscription) {
-        if (compositeSubscription == null) {
-            return;
-        }
-        compositeSubscription.add(subscription);
+        observerResourceManager.addSubscription(subscription);
     }
 
     @Override
     public void removeDisposable(Disposable disposable) {
-        if (compositeDisposable == null) {
-            return;
-        }
-        compositeDisposable.remove(disposable);
+        observerResourceManager.removeDisposable(disposable);
     }
 
     @Override
     public void removeSubscription(Subscription subscription) {
-        if (compositeSubscription == null) {
-            return;
-        }
-        compositeSubscription.remove(subscription);
+        observerResourceManager.removeSubscription(subscription);
     }
 
-
-    @Override
-    public void showDialog(Object o) {
-
-    }
 
     @Override
     public Context getContext() {
