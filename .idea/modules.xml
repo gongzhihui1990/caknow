@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/caknow.iml" filepath="$PROJECT_DIR$/caknow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gtrFrame/gtrFrame.iml" filepath="$PROJECT_DIR$/gtrFrame/gtrFrame.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java_annotations/java_annotations.iml" filepath="$PROJECT_DIR$/java_annotations/java_annotations.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java_processors/java_processors.iml" filepath="$PROJECT_DIR$/java_processors/java_processors.iml" />
+    </modules>
+  </component>
+</project>
