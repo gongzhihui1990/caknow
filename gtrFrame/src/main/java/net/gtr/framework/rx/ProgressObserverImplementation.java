@@ -28,6 +28,8 @@ public class ProgressObserverImplementation<T> extends AbstractProgressObserver<
     private CharSequence pMessage;
     private Context context;
 
+    private static ObserverResourceHolder defaultHolder;
+
     /**
      * @param applicationObserverHolder ApplicationObserverResourceHolder
      */
@@ -40,6 +42,16 @@ public class ProgressObserverImplementation<T> extends AbstractProgressObserver<
             pMessage = "加载中...";
             pDialog.setCancelable(mCancelable);
         }
+    }
+
+    /**
+     * 无applicationObserverHolder 不建议
+     */
+    public ProgressObserverImplementation() {
+        if (defaultHolder == null) {
+            defaultHolder = new DefaultObserverResourceHolder();
+        }
+        setObserverHolder(defaultHolder);
     }
 
     /**
@@ -66,31 +78,34 @@ public class ProgressObserverImplementation<T> extends AbstractProgressObserver<
         return this;
     }
 
-    private boolean checkDialog(){
-        if (getContext() == null){
+    private boolean checkDialog() {
+        if (getContext() == null) {
             return false;
         }
         if (msgDialog != null) {
             msgDialog.dismiss();
-        }else {
+        } else {
             msgDialog = new MessageDialog(getContext());
         }
         return true;
 
     }
-    public void setDialogConfirmBtn(CharSequence btnText, View.OnClickListener onClickListener){
-        if (checkDialog()){
+
+    public void setDialogConfirmBtn(CharSequence btnText, View.OnClickListener onClickListener) {
+        if (checkDialog()) {
             msgDialog.setConfirmButtonText(btnText);
             msgDialog.setConfirmButtonOnClickListener(onClickListener);
         }
     }
+
     public void showDialogByMessage(CharSequence message) {
-        if (checkDialog()){
+        if (checkDialog()) {
             msgDialog.setTitle("提示");
             msgDialog.setMessage(message);
             msgDialog.show();
         }
     }
+
     @Override
     protected void showProgress() {
         if (pDialog != null && mShow) {

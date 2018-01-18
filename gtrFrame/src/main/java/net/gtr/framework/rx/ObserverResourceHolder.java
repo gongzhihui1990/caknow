@@ -4,6 +4,8 @@
 
 package net.gtr.framework.rx;
 
+import android.support.annotation.Nullable;
+
 import org.reactivestreams.Subscription;
 
 import io.reactivex.disposables.Disposable;
@@ -21,28 +23,28 @@ public interface ObserverResourceHolder {
      *
      * @param disposable
      */
-    void addDisposable(Disposable disposable);
+    void addDisposable(@Nullable Disposable disposable);
 
     /**
      * 为容器添加subscription resource
      *
      * @param subscription
      */
-    void addSubscription(Subscription subscription);
+    void addSubscription(@Nullable Subscription subscription);
 
     /**
      * 为容器移除disposable resource
      *
      * @param disposable
      */
-    void removeDisposable(Disposable disposable);
+    void removeDisposable(@Nullable Disposable disposable);
 
     /**
      * 为容器移除subscription resource
      *
      * @param subscription
      */
-    void removeSubscription(Subscription subscription);
+    void removeSubscription(@Nullable Subscription subscription);
     /**
      * 为容器移除所有resource
      *

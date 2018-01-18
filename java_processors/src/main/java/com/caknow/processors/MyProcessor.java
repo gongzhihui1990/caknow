@@ -1,13 +1,16 @@
 package com.caknow.processors;
 
-import com.caknow.annotations.LazyLoad;
+import com.caknow.annotations.RxResourceManager;
 import com.google.auto.service.AutoService;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
 
 import java.io.IOException;
+import java.lang.annotation.Annotation;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
@@ -24,6 +27,9 @@ import javax.lang.model.element.TypeElement;
 public class MyProcessor extends AbstractProcessor {
 
     private Filer filer;
+    private static final List<Class<? extends Annotation>> SupportAnnotations = Arrays.asList(
+            RxResourceManager.class
+    );
 
     @Override
     public synchronized void init(ProcessingEnvironment processingEnvironment) {
@@ -38,15 +44,23 @@ public class MyProcessor extends AbstractProcessor {
      */
     @Override
     public Set<String> getSupportedAnnotationTypes() {
-        Set<String> annotations = new LinkedHashSet<String>();
-        annotations.add(LazyLoad.class.getCanonicalName());
+        Set<String> types = new LinkedHashSet<>();
+        for (Class<? extends Annotation> annotation : getSupportedAnnotations()) {
+            types.add(annotation.getCanonicalName());
+        }
+        return types;
+    }
+
+    private Set<Class<? extends Annotation>> getSupportedAnnotations() {
+        Set<Class<? extends Annotation>> annotations = new LinkedHashSet<>();
+        annotations.addAll(SupportAnnotations);
         return annotations;
     }
 
     @Override
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
         // roundEnv.getElementsAnnotatedWith()返回使用给定注解类型的元素
-        for (Element element : roundEnvironment.getElementsAnnotatedWith(LazyLoad.class)) {
+        for (Element element : roundEnvironment.getElementsAnnotatedWith(RxResourceManager.class)) {
             System.out.println("------------------------------");
             // 判断元素的类型为Class
             if (element.getKind() == ElementKind.CLASS) {
@@ -56,7 +70,7 @@ public class MyProcessor extends AbstractProcessor {
                 System.out.println(typeElement.getSimpleName());
                 System.out.println(typeElement.getQualifiedName());
                 // 输出注解属性值
-                System.out.println(typeElement.getAnnotation(LazyLoad.class).value());
+                System.out.println(typeElement.getAnnotation(RxResourceManager.class).value());
 
                 typeElement.getEnclosedElements();
                 // 创建main方法
@@ -66,7 +80,7 @@ public class MyProcessor extends AbstractProcessor {
                         .addStatement("$T.out.println($S)", System.class, "Hello, JavaPoet!")
                         .build();
                 // 创建HelloWorld类
-                String className = typeElement.getSimpleName().toString()+"_Fuck";
+                String className = typeElement.getSimpleName().toString() + "_Fuck";
                 TypeSpec lazyLoadClass = TypeSpec.classBuilder(className)
                         .addModifiers(Modifier.PUBLIC, Modifier.FINAL)
                         .addMethod(main)

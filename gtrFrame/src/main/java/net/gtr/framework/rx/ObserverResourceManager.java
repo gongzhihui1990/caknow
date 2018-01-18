@@ -1,6 +1,7 @@
 package net.gtr.framework.rx;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 
 import org.reactivestreams.Subscription;
 
@@ -11,41 +12,43 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 /**
- * Created by Administrator on 2018/1/14.
+ *
+ * @author heisenberg
+ * @date 2018/1/15
  */
 
-public class ObserverResourceManager implements ObserverResourceHolder{
+public class ObserverResourceManager implements ObserverResourceHolder {
     private List<Subscription> compositeSubscription = new ArrayList<>();
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
 
     @Override
     public void addDisposable(Disposable disposable) {
-        if (compositeDisposable == null) {
+        if (compositeDisposable == null || disposable == null) {
             return;
         }
         compositeDisposable.add(disposable);
     }
 
     @Override
-    public void addSubscription(Subscription subscription) {
-        if (compositeSubscription == null) {
+    public void addSubscription(@Nullable Subscription subscription) {
+        if (compositeSubscription == null || subscription == null) {
             return;
         }
         compositeSubscription.add(subscription);
     }
 
     @Override
-    public void removeDisposable(Disposable disposable) {
-        if (compositeDisposable == null) {
+    public void removeDisposable(@Nullable Disposable disposable) {
+        if (compositeDisposable == null || disposable == null) {
             return;
         }
         compositeDisposable.remove(disposable);
     }
 
     @Override
-    public void removeSubscription(Subscription subscription) {
-        if (compositeSubscription == null) {
+    public void removeSubscription(@Nullable Subscription subscription) {
+        if (compositeSubscription == null || subscription == null) {
             return;
         }
         compositeSubscription.remove(subscription);
@@ -57,8 +60,9 @@ public class ObserverResourceManager implements ObserverResourceHolder{
         compositeDisposable.clear();
         //subscription clear
         for (Subscription subscription : compositeSubscription) {
-            if (subscription != null)
+            if (subscription != null) {
                 subscription.cancel();
+            }
             subscription = null;
         }
         compositeSubscription.clear();

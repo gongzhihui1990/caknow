@@ -23,7 +23,9 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * 线程切换工具类
- * Created by heisenberg on 2017/6/23.
+ *
+ * @author heisenberg
+ * @date 2017/6/23
  */
 
 public final class RxHelper {
@@ -190,27 +192,32 @@ public final class RxHelper {
      * @return
      */
     public static Observable<Integer> countdown(int time, long period, TimeUnit unit) {
-        if (time < 0) time = 0;
+        if (time < 0) {
+            time = 0;
+        }
         final int countTime = time;
         return Observable.interval(0, period, unit)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .map(new Function<Long, Integer>() {//通过map()将0、1、2、3...的计数变为...3、2、1、0倒计时
+                .map(new Function<Long, Integer>() {
+                    //通过map()将0、1、2、3...的计数变为...3、2、1、0倒计时
                     @Override
                     public Integer apply(@NonNull Long increaseTime) throws Exception {
                         return countTime - increaseTime.intValue();
                     }
-                }).take(countTime + 1);//通过take()取>=0的Observable
+                    //通过take()取>=0的Observable
+                }).take(countTime + 1);
     }
+
     /**
      * 倒计时
      *
      * @param time
      * @return
      */
-    public static Observable<Runnable> delay(int time, TimeUnit unit,Runnable delay) {
+    public static Observable<Runnable> delay(int time, TimeUnit unit, Runnable delay) {
         return Observable.just(delay)
-                .delay(time,unit);
+                .delay(time, unit);
 
     }
 

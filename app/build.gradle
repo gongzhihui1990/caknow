@@ -20,13 +20,13 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('/workspace/github/Caknow/apkFile/psw_android.keystore')
+            storeFile file('../apkFile/psw_android.keystore')
             keyPassword 'android'
             keyAlias 'china'
             storePassword 'android'
         }
         debug {
-            storeFile file('/workspace/github/Caknow/apkFile/psw_android.keystore')
+            storeFile file('../apkFile/psw_android.keystore')
             keyPassword 'android'
             keyAlias 'china'
             storePassword 'android'

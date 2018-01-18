@@ -29,13 +29,10 @@ import io.reactivex.disposables.Disposable;
 
 public abstract class RxBaseFragment extends Fragment implements ApplicationObserverResourceHolder {
     protected RxBaseActivity mActivity;
-    //observer 观察者管理
+    /**
+     * use to manage resource
+     */
     ObserverResourceManager observerResourceManager = new ObserverResourceManager();
-
-    @Override
-    public void showDialog(Object o) {
-        //TODO
-    }
 
     protected RxBaseActivity getBaseActivity() {
         return mActivity;
@@ -95,17 +92,15 @@ public abstract class RxBaseFragment extends Fragment implements ApplicationObse
     }
 
     /**
-     * onDestroy时调用此方法
-     * 切断此Activity中的观察者容器中包含的观察者
+     * {@link ObserverResourceManager#clearWorkOnDestroy()}
      */
+    @Override
     public void clearWorkOnDestroy() {
         observerResourceManager.clearWorkOnDestroy();
     }
 
     /**
-     * 添加disposable到Activity生命周期，Activity销毁时候，disposable执行dispose
-     *
-     * @param disposable
+     * {@link ObserverResourceManager#addDisposable(Disposable)}
      */
     @Override
     public void addDisposable(Disposable disposable) {
@@ -113,20 +108,24 @@ public abstract class RxBaseFragment extends Fragment implements ApplicationObse
     }
 
     /**
-     * 类似 addSubscription(Disposable disposable)
-     *
-     * @param subscription
+     * {@link ObserverResourceManager#addSubscription(Subscription)}
      */
     @Override
     public void addSubscription(Subscription subscription) {
         observerResourceManager.addSubscription(subscription);
     }
 
+    /**
+     * {@link ObserverResourceManager#removeDisposable(Disposable)}
+     */
     @Override
     public void removeDisposable(Disposable disposable) {
         observerResourceManager.removeDisposable(disposable);
     }
 
+    /**
+     * {@link ObserverResourceManager#removeSubscription(Subscription)}
+     */
     @Override
     public void removeSubscription(Subscription subscription) {
         observerResourceManager.removeSubscription(subscription);

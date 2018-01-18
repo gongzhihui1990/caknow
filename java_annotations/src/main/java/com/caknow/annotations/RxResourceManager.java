@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.CLASS)
 @Target(ElementType.TYPE)
-public @interface LazyLoad {
+public @interface RxResourceManager {
     String value();
 }

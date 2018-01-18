@@ -16,10 +16,8 @@ import com.caknow.android.R;
 import com.caknow.android.ui.BaseFragmentArgs;
 import com.caknow.android.ui.adapter.ViewPagerMainAdapter;
 import com.caknow.android.ui.fragment.DisableFragment;
-import com.caknow.android.ui.fragment.MainServiceFragment;
-import com.caknow.android.ui.fragment.MainSettingFragment;
 import com.caknow.android.widget.MainViewPager;
-import com.caknow.annotations.LazyLoad;
+import com.caknow.annotations.RxResourceManager;
 
 import net.gtr.framework.app.activity.RxBaseActivity;
 
@@ -30,7 +28,7 @@ import butterknife.BindView;
 /**
  * Created by caroline on 2017/12/10.
  */
-@LazyLoad(value = "caroline")
+@RxResourceManager(value = "caroline")
 public class MainPageActivity extends RxBaseActivity {
     @BindView(R.id.main_pager_container)
     MainViewPager viewPager;
@@ -49,10 +47,10 @@ public class MainPageActivity extends RxBaseActivity {
             mSelectedPosition = savedInstanceState.getInt(BUNDLE_KEY, 0);
         }
         ArrayList<BaseFragmentArgs> fragmentArgs = new ArrayList<BaseFragmentArgs>();
-        fragmentArgs.add(new BaseFragmentArgs(MainServiceFragment.class, R.string.tab_service, R.drawable.icons_tab_service));
+        fragmentArgs.add(new BaseFragmentArgs(DisableFragment.class, R.string.tab_service, R.drawable.icons_tab_service));
         fragmentArgs.add(new BaseFragmentArgs(DisableFragment.class, R.string.tab_community, R.drawable.icons_tab_community));
         fragmentArgs.add(new BaseFragmentArgs(DisableFragment.class, R.string.tab_advice, R.drawable.icons_tab_advice));
-        fragmentArgs.add(new BaseFragmentArgs(MainSettingFragment.class, R.string.tab_settings, R.drawable.icons_tab_settings));
+        fragmentArgs.add(new BaseFragmentArgs(DisableFragment.class, R.string.tab_settings, R.drawable.icons_tab_settings));
         initPager(viewPager, fragmentArgs);
     }
 
@@ -81,16 +79,7 @@ public class MainPageActivity extends RxBaseActivity {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageSelected(int postion) {
-                // final Fragment selectedFragment =
-                // mainPagerAdapter.getItem(postion);
                 mSelectedPosition = postion;
-//                BaseFragmentArgs curpage = fragmentArgs.get(postion);
-//                Class curFragment = curpage.getFragment();
-//                if (curFragment.getName().equals(LocationFragment.class.getName())) {
-                //TripRecordService.onlocationPage = true;
-//                } else {
-                //TripRecordService.onlocationPage = false;
-//                }
                 for (int i = 0; i < mainPagerLayout.getChildCount(); i++) {
                     LinearLayout itemBoom = (LinearLayout) mainPagerLayout.getChildAt(i);
                     if (i == mSelectedPosition) {

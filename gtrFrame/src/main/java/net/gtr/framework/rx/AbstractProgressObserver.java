@@ -17,8 +17,9 @@ import io.reactivex.disposables.Disposable;
 
 /**
  * Created by heisenberg on 2017/4/18.
- * 实现了Observer和Subscriber的观察者
- * 保护不让外部包的类构造使用ProgressObserver
+ * 实现了Observer和Subscriber的观察者,执行过程为
+ * {@link #onBegin()}、{@link #onNext(Object)}、{@link #onError(Throwable)} or {@link #onRelease()}
+ *
  */
 
 abstract class AbstractProgressObserver<T> implements Observer<T>, Subscriber<T> {
